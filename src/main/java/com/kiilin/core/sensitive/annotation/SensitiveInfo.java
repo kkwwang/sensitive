@@ -32,7 +32,7 @@ public @interface SensitiveInfo {
     /**
      * 脱敏类型
      *
-     * @return
+     * @return 脱敏类型
      */
     SensitiveType value();
 

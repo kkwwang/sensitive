@@ -13,8 +13,8 @@ package com.kiilin.core.sensitive.enums;
  * @see {@link SensitiveType}
  * @since JDK1.8
  */
-
 public enum SensitiveType {
+
     /**
      * 中文名(张三 -> 张*)
      */

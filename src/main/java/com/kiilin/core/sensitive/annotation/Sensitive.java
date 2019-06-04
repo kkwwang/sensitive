@@ -23,7 +23,7 @@ public @interface Sensitive {
     /**
      * 是否脱敏
      *
-     * @return
+     * @return 是否需要脱敏
      */
     boolean value() default true;
 
