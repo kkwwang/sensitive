@@ -9,10 +9,10 @@ package com.kiilin.core.sensitive.annotation;
 import java.lang.annotation.*;
 
 /**
+ * 敏感字段标记注解(使用在接口上)
+ *
  * @author wangkai
  * @version V 1.0
- * @description 敏感字段标记注解(使用在接口上)
- * @see {@link Sensitive}
  * @since JDK1.8
  */
 @Target({ElementType.METHOD, ElementType.TYPE})

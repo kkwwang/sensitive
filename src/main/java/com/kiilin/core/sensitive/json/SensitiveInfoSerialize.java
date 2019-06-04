@@ -27,10 +27,10 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
+ * 脱敏序列化方式
+ *
  * @author wangkai
  * @version V 1.0
- * @description 脱敏序列化方式
- * @see {@link SensitiveInfoSerialize}
  * @since JDK1.8
  */
 public class SensitiveInfoSerialize extends JsonSerializer<String> implements ContextualSerializer {

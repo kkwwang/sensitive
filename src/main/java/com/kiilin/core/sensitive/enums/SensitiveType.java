@@ -7,16 +7,16 @@
 package com.kiilin.core.sensitive.enums;
 
 /**
+ * 脱敏字段类型
+ *
  * @author wangkai
  * @version V 1.0
- * @description 脱敏字段类型
- * @see {@link SensitiveType}
  * @since JDK1.8
  */
 public enum SensitiveType {
 
     /**
-     * 中文名(张三 -> 张*)
+     * 中文名 (张三 → 张*)
      */
     CHINESE_NAME("(?<=.{1}).", "*"),
 
