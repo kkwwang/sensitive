@@ -1,14 +1,13 @@
 /**
- * (#)com.kiilin.core.sensitive.enums.SensitiveType.java
- * Create time 2019-03-29 9:47
- * Create by kiilin kiilin@kiilin.com
- * Copyright 2019 kiilin http://www.kiilin.com
+ * Create time 2019-05-29 9:47
+ * Create by wangkai kiilin@kiilin.com
+ * Copyright 2018 kiilin http://www.kiilin.com
  */
 
 package com.kiilin.core.sensitive.enums;
 
 /**
- * @author kiilin
+ * @author wangkai
  * @version V 1.0
  * @description 脱敏字段类型
  * @see {@link SensitiveType}
@@ -19,7 +18,12 @@ public enum SensitiveType {
     /**
      * 中文名(张三 -> 张*)
      */
-    CHINESE_NAME("(?<=.{1}).","*"),
+    CHINESE_NAME("(?<=.{1}).", "*"),
+
+    /**
+     * 密码
+     */
+    PASSWORD(".", ""),
 
     /**
      * 身份证号
@@ -29,32 +33,32 @@ public enum SensitiveType {
     /**
      * 座机号
      */
-    FIXED_PHONE("(?<=\\w{3})\\w(?=\\w{2})","*"),
+    FIXED_PHONE("(?<=\\w{3})\\w(?=\\w{2})", "*"),
 
     /**
      * 手机号
      */
-    MOBILE_PHONE("(?<=\\w{3})\\w(?=\\w{4})","*"),
+    MOBILE_PHONE("(?<=\\w{3})\\w(?=\\w{4})", "*"),
 
     /**
      * 地址
      */
-    ADDRESS("(.{5}).+(.{4})","$1*****$2"),
+    ADDRESS("(.{5}).+(.{4})", "$1*****$2"),
 
     /**
      * 电子邮件
      */
-    EMAIL("(\\w+)\\w{3}@(\\w+)","$1***@$2"),
+    EMAIL("(\\w+)\\w{3}@(\\w+)", "$1***@$2"),
 
     /**
      * 银行卡
      */
-    BANK_CARD("(?<=\\w{4})\\w(?=\\w{4})","*"),
+    BANK_CARD("(?<=\\w{4})\\w(?=\\w{4})", "*"),
 
     /**
      * 公司开户银行联号
      */
-    CNAPS_CODE("(?<=\\w{4})\\w(?=\\w{4})","*"),
+    CNAPS_CODE("(?<=\\w{4})\\w(?=\\w{4})", "*"),
 
     /**************************************************************************************/
     ;
@@ -64,7 +68,7 @@ public enum SensitiveType {
      */
     private String pattern;
 
-    private String targetChar = "*";
+    private String targetChar;
 
 
     SensitiveType() {
