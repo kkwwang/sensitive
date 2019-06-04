@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 /**
  * Spring Context 工具类
  *
- * @author
- * @email
- * @date 2016年11月29日 下午11:45:51
+ * @author others
+ * @version V 1.0
+ * @since JDK1.8
  */
 @Component
 public class SpringContextUtils implements ApplicationContextAware {

@@ -17,10 +17,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 敏感字段标记注解（使用在字段上）
+ *
  * @author wangkai
  * @version V 1.0
- * @description 敏感字段标记注解（使用在字段上）
- * @see {@link SensitiveInfo}
  * @since JDK1.8
  */
 @Retention(RetentionPolicy.RUNTIME)
