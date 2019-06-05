@@ -48,7 +48,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
 
         // 获取controller方法
-        Sensitive sensitive = null;
+        Sensitive sensitive;
         try {
             HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
             HandlerExecutionChain handler = SpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
