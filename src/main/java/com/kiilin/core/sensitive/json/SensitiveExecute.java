@@ -6,11 +6,12 @@
 
 package com.kiilin.core.sensitive.json;
 
+
 /**
+ * 脱敏全局执行条件
+ *
  * @author wangkai
  * @version V 1.0
- * @description 脱敏全局执行条件
- * @see {@link SensitiveExecute}
  * @since JDK1.8
  */
 public interface SensitiveExecute {
