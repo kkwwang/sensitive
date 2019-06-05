@@ -1,7 +1,7 @@
 /**
  * Create time 2019-06-03 16:04
  * Create by wangkai kiilin@kiilin.com
- * Copyright 2018 kiilin http://www.kiilin.com
+ * Copyright 2019 kiilin http://www.kiilin.com
  */
 
 package com.kiilin.core.sensitive.json;
@@ -47,24 +47,29 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
     @Override
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
 
-        // 获取controller方法
-        Sensitive sensitive;
-        try {
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            HandlerExecutionChain handler = SpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
-            HandlerMethod method = (HandlerMethod) handler.getHandler();
-            // 获取controller方法上的注解
-            sensitive = method.getMethodAnnotation(Sensitive.class);
-            if (sensitive == null) {
-                sensitive = method.getBeanType().getAnnotation(Sensitive.class);
-            }
+        SensitiveExecute bean = SpringContextUtils.getBean(SensitiveExecute.class);
 
-            if (sensitive != null && sensitive.value()) {
-                // 替换
-                value = value.replaceAll(this.type.getPattern(), this.type.getTargetChar());
+        if (null != bean && bean.execute()) {
+            // 获取controller方法
+            Sensitive sensitive;
+            try {
+                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+                HandlerExecutionChain handler = SpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
+                HandlerMethod method = (HandlerMethod) handler.getHandler();
+                // 获取controller方法上的注解
+                sensitive = method.getMethodAnnotation(Sensitive.class);
+                if (sensitive == null) {
+                    sensitive = method.getBeanType().getAnnotation(Sensitive.class);
+                }
+
+                if (sensitive != null && sensitive.value()) {
+                    // 替换
+                    value = value.replaceAll(this.type.getPattern(), this.type.getTargetChar());
+                }
+            } catch (Exception e) {
             }
-        } catch (Exception e) {
         }
+
         jsonGenerator.writeString(value);
     }
 

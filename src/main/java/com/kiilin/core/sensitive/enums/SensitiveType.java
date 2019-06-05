@@ -1,7 +1,7 @@
 /**
  * Create time 2019-05-29 9:47
  * Create by wangkai kiilin@kiilin.com
- * Copyright 2018 kiilin http://www.kiilin.com
+ * Copyright 2019 kiilin http://www.kiilin.com
  */
 
 package com.kiilin.core.sensitive.enums;
