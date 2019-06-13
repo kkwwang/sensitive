@@ -16,37 +16,15 @@ import org.springframework.stereotype.Component;
 public class SpringContextUtils implements ApplicationContextAware {
     public static ApplicationContext applicationContext;
 
-    public static Object getBean(String name) {
-        return applicationContext.getBean(name);
-    }
-
+    /**
+     * 获取spring的bean
+     *
+     * @param clazz
+     * @param <T>
+     * @return
+     */
     public static <T> T getBean(Class<T> clazz) {
         return applicationContext.getBean(clazz);
-    }
-
-    public static <T> T getBean(String name, Class<T> requiredType) {
-        return applicationContext.getBean(name, requiredType);
-    }
-
-    public static boolean containsBean(String name) {
-        return applicationContext.containsBean(name);
-    }
-
-    public static boolean isSingleton(String name) {
-        return applicationContext.isSingleton(name);
-    }
-
-    public static Class<? extends Object> getType(String name) {
-        return applicationContext.getType(name);
-    }
-
-    public static String getApplicationName() {
-        return applicationContext.getApplicationName();
-    }
-
-    public static <T> T getEnv(String name, Class<T> clazz) {
-        T property = applicationContext.getEnvironment().getProperty(name, clazz);
-        return property;
     }
 
     @Override
