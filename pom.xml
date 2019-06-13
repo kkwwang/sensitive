@@ -66,6 +66,12 @@
             <version>2.5</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.2</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -80,4 +86,38 @@
             </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ali</id>
+            <distributionManagement>
+                <repository>
+                    <id>rdc-releases</id>
+                    <name>ali-releases</name>
+                    <url>https://repo.rdc.aliyun.com/repository/50045-release-H35zWu/</url>
+                </repository>
+
+                <snapshotRepository>
+                    <id>rdc-snapshots</id>
+                    <name>ali-snapshots</name>
+                    <url>https://repo.rdc.aliyun.com/repository/50045-snapshot-x3Wly7/</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
+        <profile>
+            <id>m2</id>
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>sonatype-nexus-snapshots</id>
+                    <name>Sonatype Nexus Snapshots</name>
+                    <url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
+                </snapshotRepository>
+                <repository>
+                    <id>sonatype-nexus-staging</id>
+                    <name>Nexus Release Repository</name>
+                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
+        </profile>
+    </profiles>
 </project>

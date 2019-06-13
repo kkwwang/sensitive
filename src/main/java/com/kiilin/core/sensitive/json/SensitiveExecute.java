@@ -16,6 +16,11 @@ package com.kiilin.core.sensitive.json;
  */
 public interface SensitiveExecute {
 
+    /**
+     * 全局配置 - 脱敏执行的先决条件
+     *
+     * @return
+     */
     boolean execute();
 
 }

@@ -12,15 +12,12 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.ContextualSerializer;
-import com.kiilin.core.sensitive.annotation.Sensitive;
 import com.kiilin.core.sensitive.annotation.SensitiveInfo;
+import com.kiilin.core.sensitive.constant.SensitiveConstant;
 import com.kiilin.core.sensitive.enums.SensitiveType;
 import com.kiilin.core.sensitive.util.SpringContextUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerExecutionChain;
-import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -47,27 +44,19 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
     @Override
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
 
+        // 读取全局执行接口
         SensitiveExecute bean = SpringContextUtils.getBean(SensitiveExecute.class);
+        // 未实现接口 默认开启脱敏
+        boolean execute = bean == null || (null != bean && bean.execute());
 
-        if (null != bean && bean.execute()) {
-            // 获取controller方法
-            Sensitive sensitive;
-            try {
-                HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-                HandlerExecutionChain handler = SpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
-                HandlerMethod method = (HandlerMethod) handler.getHandler();
-                // 获取controller方法上的注解
-                sensitive = method.getMethodAnnotation(Sensitive.class);
-                if (sensitive == null) {
-                    sensitive = method.getBeanType().getAnnotation(Sensitive.class);
-                }
+        // 读取当前请求是否需要脱敏
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
+        boolean isSensitive = isSensitiveValue != null && (boolean) isSensitiveValue;
 
-                if (sensitive != null && sensitive.value()) {
-                    // 替换
-                    value = value.replaceAll(this.type.getPattern(), this.type.getTargetChar());
-                }
-            } catch (Exception e) {
-            }
+        if (execute && isSensitive) {
+            // 替换
+            value = value.replaceAll(this.type.getPattern(), this.type.getTargetChar());
         }
 
         jsonGenerator.writeString(value);
