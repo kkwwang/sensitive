@@ -5,21 +5,20 @@ import com.kiilin.sensitive.demo.entity.UserInfo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Sensitive
 @RestController
+@Sensitive
 public class TestController {
 
 
     @GetMapping("/test")
-    @Sensitive
     public UserInfo test1() {
+        UserInfo userInfo = new UserInfo();
 
-        return new UserInfo()
-                .setName("张三")
-                .setUsername("zhangsan")
-                .setEmail("zhangsan@qq.com")
-                .setIdCard("320321199808081234")
-                .setPhone("13888888888")
-                ;
+        userInfo.setName("张三");
+        userInfo.setUsername("zhangsan");
+        userInfo.setEmail("zhangsan@qq.com");
+        userInfo.setIdCard("320321199808081234");
+        userInfo.setPhone("13888888888");
+        return userInfo;
     }
 }
