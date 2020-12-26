@@ -27,3 +27,30 @@
 
 
 - 在需要脱敏的`Controller`方法或类上添加`@Sensitive`注解，方法上表示该接口需要脱敏，类表示该类所有方法均需脱敏
+
+
+```java
+// demo执行效果
+GET http://localhost:8080/test
+
+HTTP/1.1 200
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Sat, 26 Dec 2020 06:23:01 GMT
+Keep-Alive: timeout=60
+Connection: keep-alive
+
+{
+"email": "zhang***@qq.com",
+"name": "张*",
+"username": "h**",
+"phone": "138****8888",
+"idCard": "320***********1234"
+}
+
+Response code: 200; Time: 131ms; Content length: 108 bytes
+
+```
+
+
+### 欢迎提交新预定义规则，或对项目完善
