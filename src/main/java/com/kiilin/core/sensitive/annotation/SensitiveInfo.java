@@ -36,4 +36,18 @@ public @interface SensitiveInfo {
      */
     SensitiveType value();
 
+    /**
+     * 输入格式，使用正则表达式
+     *
+     * @return
+     */
+    String pattern() default "";
+
+    /**
+     * 替换目标字符
+     *
+     * @return
+     */
+    String targetChar() default "*";
+
 }
