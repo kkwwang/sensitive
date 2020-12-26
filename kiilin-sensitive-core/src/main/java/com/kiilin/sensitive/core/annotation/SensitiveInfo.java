@@ -24,7 +24,7 @@ import java.lang.annotation.Target;
  * @since JDK1.8
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD})
 @JacksonAnnotationsInside
 @JsonSerialize(using = SensitiveInfoSerialize.class)
 public @interface SensitiveInfo {
@@ -49,5 +49,6 @@ public @interface SensitiveInfo {
      * @return
      */
     String targetChar() default "*";
+
 
 }

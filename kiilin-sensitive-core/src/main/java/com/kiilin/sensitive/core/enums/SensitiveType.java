@@ -71,9 +71,9 @@ public enum SensitiveType {
     /**
      * 输入格式(1,2,2)
      */
-    public String pattern;
+    private final String pattern;
 
-    public String targetChar;
+    private final String targetChar;
 
 
     SensitiveType(String pattern, String targetChar) {
