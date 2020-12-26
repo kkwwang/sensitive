@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.kiilin.core.sensitive.annotation.SensitiveInfo;
 import com.kiilin.core.sensitive.constant.SensitiveConstant;
 import com.kiilin.core.sensitive.enums.SensitiveType;
-import com.kiilin.core.sensitive.util.SpringContextUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -32,31 +31,39 @@ import java.util.Objects;
  */
 public class SensitiveInfoSerialize extends JsonSerializer<String> implements ContextualSerializer {
 
-    private SensitiveType type;
+
+    /**
+     * 匹配正则
+     */
+    private String pattern;
+
+    /**
+     * 目标字符
+     */
+    private String targetChar;
 
     public SensitiveInfoSerialize() {
     }
 
     public SensitiveInfoSerialize(final SensitiveType type) {
-        this.type = type;
+        this.pattern = type.getPattern();
+        this.targetChar = type.getTargetChar();
+    }
+
+    public SensitiveInfoSerialize(String pattern, String targetChar) {
+        this.pattern = pattern;
+        this.targetChar = targetChar;
     }
 
     @Override
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
-
-        // 读取全局执行接口
-        SensitiveExecute bean = SpringContextUtils.getBean(SensitiveExecute.class);
-        // 未实现接口 默认开启脱敏
-        boolean execute = bean == null || (null != bean && bean.execute());
-
         // 读取当前请求是否需要脱敏
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
-        boolean isSensitive = isSensitiveValue != null && (boolean) isSensitiveValue;
 
-        if (execute && isSensitive) {
+        if (isSensitiveValue != null && isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
             // 替换
-            value = value.replaceAll(this.type.getPattern(), this.type.getTargetChar());
+            value = value.replaceAll(this.pattern, this.targetChar);
         }
 
         jsonGenerator.writeString(value);
@@ -74,9 +81,13 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
                     sensitiveInfo = beanProperty.getContextAnnotation(SensitiveInfo.class);
                 }
 
-                // 如果能得到注解，就将注解的 value 传入 SensitiveInfoSerialize
+                // 如果能得到注解
                 if (sensitiveInfo != null) {
-                    return new SensitiveInfoSerialize(sensitiveInfo.value());
+                    if (sensitiveInfo.value() != null) {
+                        return new SensitiveInfoSerialize(sensitiveInfo.value());
+                    } else {
+                        return new SensitiveInfoSerialize(sensitiveInfo.pattern(), sensitiveInfo.targetChar());
+                    }
                 }
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);

@@ -66,13 +66,9 @@ public enum SensitiveType {
     /**
      * 输入格式(1,2,2)
      */
-    private String pattern;
+    public String pattern;
 
-    private String targetChar;
-
-
-    SensitiveType() {
-    }
+    public String targetChar;
 
 
     SensitiveType(String pattern, String targetChar) {
@@ -84,17 +80,9 @@ public enum SensitiveType {
         return pattern;
     }
 
-    public SensitiveType setPattern(String pattern) {
-        this.pattern = pattern;
-        return this;
-    }
 
     public String getTargetChar() {
         return targetChar;
     }
 
-    public SensitiveType setTargetChar(String targetChar) {
-        this.targetChar = targetChar;
-        return this;
-    }
 }
