@@ -4,120 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
-    <groupId>com.kiilin</groupId>
-    <artifactId>kiilin-core-sensitive</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
-    <packaging>jar</packaging>
-
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
-
-    <scm>
-        <tag>master</tag>
-        <connection>scm:git:git@gitee.com:kiilin/sensitive.git</connection>
-        <developerConnection>scm:git:git@gitee.com:kiilin/sensitive.git</developerConnection>
-        <url>https://gitee.com/kiilin/sensitive</url>
-    </scm>
-
-    <developers>
-        <developer>
-            <name>kiilin</name>
-            <email>kiilin@kiilin.com</email>
-            <organization>kiilin</organization>
-        </developer>
-    </developers>
+    <groupId>org.example</groupId>
+    <artifactId>sensitive-parent</artifactId>
+    <version>2.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
     <properties>
-        <java.version>1.8</java.version>
-        <!-- 文件拷贝时的编码 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <!-- 编译时的编码 -->
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.2.8.RELEASE</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.11.1</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>1.9.6</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>kiilin-sensitive-core</module>
+        <module>kiilin-sensitive-demo</module>
+    </modules>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>8</source>
-                    <target>8</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <profiles>
-        <profile>
-            <id>ali</id>
-            <distributionManagement>
-                <repository>
-                    <id>rdc-releases</id>
-                    <name>ali-releases</name>
-                    <url>https://repo.rdc.aliyun.com/repository/50045-release-H35zWu/</url>
-                </repository>
-
-                <snapshotRepository>
-                    <id>rdc-snapshots</id>
-                    <name>ali-snapshots</name>
-                    <url>https://repo.rdc.aliyun.com/repository/50045-snapshot-x3Wly7/</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
-        <profile>
-            <id>m2</id>
-            <distributionManagement>
-                <snapshotRepository>
-                    <id>sonatype-nexus-snapshots</id>
-                    <name>Sonatype Nexus Snapshots</name>
-                    <url>${sonatypeOssDistMgmtSnapshotsUrl}</url>
-                </snapshotRepository>
-                <repository>
-                    <id>sonatype-nexus-staging</id>
-                    <name>Nexus Release Repository</name>
-                    <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-                </repository>
-            </distributionManagement>
-        </profile>
-    </profiles>
 </project>
