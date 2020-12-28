@@ -8,8 +8,8 @@
         <version>2.3.3.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.kiilin.sensitive.demo</groupId>
-    <artifactId>kiilin-sensitive-demo</artifactId>
+    <groupId>com.kiilin</groupId>
+    <artifactId>kiilin-demo-sensitive</artifactId>
     <version>2.0.1-SNAPSHOT</version>
     <name>kiilin-sensitive-demo</name>
     <description>Demo project for Spring Boot</description>
