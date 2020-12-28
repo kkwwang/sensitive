@@ -8,7 +8,7 @@
 >   <artifactId>kiilin-sensitive-core</artifactId>
 >   <version>latest_version</version>
 > </dependency>
-```
+> ```
 
 #### 使用方法
 - 添加AOP依赖
