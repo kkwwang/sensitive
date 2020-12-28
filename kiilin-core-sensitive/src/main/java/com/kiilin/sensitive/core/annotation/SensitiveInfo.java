@@ -39,14 +39,14 @@ public @interface SensitiveInfo {
     /**
      * 输入格式，使用正则表达式, 优先级大于value
      *
-     * @return
+     * @return 格式
      */
     String pattern() default "";
 
     /**
      * 替换目标字符, 优先级大于value
      *
-     * @return
+     * @return 替换目标字符串
      */
     String targetChar() default "*";
 

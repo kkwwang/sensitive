@@ -15,8 +15,8 @@
     </properties>
 
     <modules>
-        <module>kiilin-sensitive-core</module>
-        <module>kiilin-sensitive-demo</module>
+        <module>kiilin-demo-sensitive</module>
+        <module>kiilin-core-sensitive</module>
     </modules>
 
 </project>
