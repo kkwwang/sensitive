@@ -19,7 +19,7 @@
 - 在需要脱敏的实体的字段上添加注解
   ```java
     // 使用自定义规则
-    @SensitiveInfo(pattern = "(.){2}(.*)", targetChar = "$1**")
+    @SensitiveInfo(pattern = "(.{2})(.*)", targetChar = "$1**")
     // 使用预定义规则
     @SensitiveInfo(SensitiveType.EMAIL)
     // 若两种规则混用，自定义规则优先级更高
@@ -43,7 +43,7 @@ Connection: keep-alive
 {
 "email": "zhang***@qq.com",
 "name": "张*",
-"username": "h**",
+"username": "zh**",
 "phone": "138****8888",
 "idCard": "320***********1234"
 }
