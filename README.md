@@ -1,6 +1,14 @@
 #### 说明
 > 项目依赖springMVC仅对`RestController`接口有效，即返回`JSON`格式的接口   
-> 使用说明及demo仅编写`springboot`，使用`springmvc`框架请参考配置
+> 使用说明及demo仅编写`springboot`，使用`springmvc`框架请参考配置   
+> 插件已推送至`maven`中央库
+> ```java
+> <dependency>
+>   <groupId>com.kiilin</groupId>
+>   <artifactId>kiilin-sensitive-core</artifactId>
+>   <version>latest_version</version>
+> </dependency>
+```
 
 #### 使用方法
 - 添加AOP依赖
