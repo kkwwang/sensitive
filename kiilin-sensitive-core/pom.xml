@@ -12,8 +12,13 @@
 
     <groupId>com.kiilin</groupId>
     <artifactId>kiilin-sensitive-core</artifactId>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <packaging>jar</packaging>
+
+    <name>kiilin-sensitive-core</name>
+    <description>使用注解方式将返回结果脱敏处理</description>
+    <url>https://gitee.com/kiilin/sensitive</url>
+
 
     <licenses>
         <license>
@@ -79,6 +84,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>

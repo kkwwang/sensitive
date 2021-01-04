@@ -9,7 +9,7 @@ package com.kiilin.sensitive.core.annotation;
 import java.lang.annotation.*;
 
 /**
- * 敏感字段标记注解(使用在接口上)
+ * 敏感字段标记注解(使用在controller接口上)
  *
  * @author wangkai
  * @version V 1.0
