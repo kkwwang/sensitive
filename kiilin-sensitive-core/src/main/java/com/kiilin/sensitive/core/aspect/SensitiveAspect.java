@@ -8,14 +8,12 @@ package com.kiilin.sensitive.core.aspect;
 
 
 import com.kiilin.sensitive.core.annotation.Sensitive;
-import com.kiilin.sensitive.core.annotation.SensitiveInfo;
 import com.kiilin.sensitive.core.constant.SensitiveConstant;
-import com.kiilin.sensitive.core.util.SpringContextUtils;
+import com.kiilin.sensitive.core.util.SensitiveSpringContextUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
@@ -46,7 +44,7 @@ public class SensitiveAspect {
         // 获取请求
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HandlerExecutionChain handler;
-        handler = SpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
+        handler = SensitiveSpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
         HandlerMethod method = (HandlerMethod) handler.getHandler();
         // 获取controller方法上的注解
         Sensitive sensitive = method.getMethodAnnotation(Sensitive.class);
