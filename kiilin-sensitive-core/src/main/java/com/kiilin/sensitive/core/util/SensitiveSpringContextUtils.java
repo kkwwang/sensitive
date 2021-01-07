@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
  * @since JDK1.8
  */
 @Component
-public class SpringContextUtils implements ApplicationContextAware {
+public class SensitiveSpringContextUtils implements ApplicationContextAware {
     public static ApplicationContext applicationContext;
 
     /**
@@ -30,6 +30,6 @@ public class SpringContextUtils implements ApplicationContextAware {
     @Override
     public void setApplicationContext(ApplicationContext applicationContext)
             throws BeansException {
-        SpringContextUtils.applicationContext = applicationContext;
+        SensitiveSpringContextUtils.applicationContext = applicationContext;
     }
 }
