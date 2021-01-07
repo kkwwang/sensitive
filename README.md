@@ -22,7 +22,9 @@
   
 - 启动类添加扫包注解
   ```java
+  @ComponentScans({
     @ComponentScan("com.kiilin.sensitive")
+  })
   ```
 
 - 在需要脱敏的实体的字段上添加注解
