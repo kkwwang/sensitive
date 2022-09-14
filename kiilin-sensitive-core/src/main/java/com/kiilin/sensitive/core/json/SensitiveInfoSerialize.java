@@ -30,18 +30,21 @@ import java.util.Objects;
  * @version V 1.0
  * @since JDK1.8
  */
-public class SensitiveInfoSerialize extends JsonSerializer<String>  implements ContextualSerializer {
+public class SensitiveInfoSerialize extends JsonSerializer<String> implements ContextualSerializer {
 
 
     /**
      * 匹配正则
      */
-    private final String pattern;
+    private String pattern;
 
     /**
      * 目标字符
      */
-    private final String targetChar;
+    private String targetChar;
+
+    public SensitiveInfoSerialize() {
+    }
 
     public SensitiveInfoSerialize(final SensitiveType type) {
         this.pattern = type.getPattern();
@@ -82,7 +85,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
                 // 如果能得到注解
                 if (sensitiveInfo != null) {
                     SensitiveInfoSerialize sensitiveInfoSerialize;
-                    if (sensitiveInfo.value() != null && StringUtils.hasText(sensitiveInfo.pattern())) {
+                    if (sensitiveInfo.value() != null && !StringUtils.hasText(sensitiveInfo.pattern())) {
                         sensitiveInfoSerialize = new SensitiveInfoSerialize(sensitiveInfo.value());
                     } else {
                         sensitiveInfoSerialize = new SensitiveInfoSerialize(sensitiveInfo.pattern(), sensitiveInfo.targetChar());
@@ -92,9 +95,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         }
-        return serializerProvider.findNullValueSerializer(null);
+        return serializerProvider.findNullValueSerializer(beanProperty);
     }
-
-
 
 }

@@ -48,7 +48,7 @@ public @interface SensitiveInfo {
      *
      * @return 替换目标字符串
      */
-    String targetChar() default "*";
+    String targetChar() default "";
 
 
 }
