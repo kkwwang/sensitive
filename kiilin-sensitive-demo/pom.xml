@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.3.RELEASE</version>
+        <version>1.4.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>com.kiilin</groupId>
     <artifactId>kiilin-sensitive-demo</artifactId>
-    <version>2.0.5</version>
+    <version>2.0.6</version>
     <name>kiilin-sensitive-demo</name>
     <description>Demo project for Spring Boot</description>
 
@@ -33,7 +33,7 @@
         <dependency>
             <groupId>com.kiilin</groupId>
             <artifactId>kiilin-sensitive-core</artifactId>
-            <version>2.0.5</version>
+            <version>2.0.6</version>
         </dependency>
 
         <dependency>
