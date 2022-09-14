@@ -9,7 +9,6 @@ package com.kiilin.sensitive.core.aspect;
 
 import com.kiilin.sensitive.core.annotation.Sensitive;
 import com.kiilin.sensitive.core.constant.SensitiveConstant;
-import com.kiilin.sensitive.core.util.SensitiveSpringContextUtils;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -21,6 +20,8 @@ import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Objects;
+
 
 /**
  * 注解切面，处理当前请求是否需要脱敏
@@ -33,6 +34,13 @@ import javax.servlet.http.HttpServletRequest;
 @Component
 public class SensitiveAspect {
 
+    final
+    HandlerMapping requestMappingHandlerMapping;
+
+    public SensitiveAspect(HandlerMapping requestMappingHandlerMapping) {
+        this.requestMappingHandlerMapping = requestMappingHandlerMapping;
+    }
+
     @Pointcut("@within(com.kiilin.sensitive.core.annotation.Sensitive) || @annotation(com.kiilin.sensitive.core.annotation.Sensitive)")
     public void pointcutByBean() {
     }
@@ -42,10 +50,11 @@ public class SensitiveAspect {
     public void before() throws Throwable {
 
         // 获取请求
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-        HandlerExecutionChain handler;
-        handler = SensitiveSpringContextUtils.getBean(HandlerMapping.class).getHandler(request);
-        HandlerMethod method = (HandlerMethod) handler.getHandler();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+        HandlerExecutionChain handler = requestMappingHandlerMapping.getHandler(request);
+        HandlerMethod method = (HandlerMethod) Objects.requireNonNull(handler).getHandler();
+
+
         // 获取controller方法上的注解
         Sensitive sensitive = method.getMethodAnnotation(Sensitive.class);
         if (sensitive == null) {

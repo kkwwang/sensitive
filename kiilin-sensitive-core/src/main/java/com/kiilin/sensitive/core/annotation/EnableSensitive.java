@@ -2,7 +2,6 @@ package com.kiilin.sensitive.core.annotation;
 
 
 import com.kiilin.sensitive.core.aspect.SensitiveAspect;
-import com.kiilin.sensitive.core.util.SensitiveSpringContextUtils;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -11,6 +10,6 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Inherited
-@Import({SensitiveAspect.class, SensitiveSpringContextUtils.class})
+@Import({SensitiveAspect.class})
 public @interface EnableSensitive {
 }

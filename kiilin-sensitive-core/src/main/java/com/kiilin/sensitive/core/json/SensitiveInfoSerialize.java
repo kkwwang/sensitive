@@ -36,15 +36,12 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
     /**
      * 匹配正则
      */
-    private String pattern;
+    private final String pattern;
 
     /**
      * 目标字符
      */
-    private String targetChar;
-
-    public SensitiveInfoSerialize() {
-    }
+    private final String targetChar;
 
     public SensitiveInfoSerialize(final SensitiveType type) {
         this.pattern = type.getPattern();
@@ -59,10 +56,10 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
     @Override
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
         // 读取当前请求是否需要脱敏
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
 
-        if (isSensitiveValue != null && isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
+        if (isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
             // 替换
             value = value.replaceAll(this.pattern, this.targetChar);
         }
@@ -85,7 +82,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
                 // 如果能得到注解
                 if (sensitiveInfo != null) {
                     SensitiveInfoSerialize sensitiveInfoSerialize;
-                    if (sensitiveInfo.value() != null && StringUtils.isEmpty(sensitiveInfo.pattern())) {
+                    if (sensitiveInfo.value() != null && StringUtils.hasText(sensitiveInfo.pattern())) {
                         sensitiveInfoSerialize = new SensitiveInfoSerialize(sensitiveInfo.value());
                     } else {
                         sensitiveInfoSerialize = new SensitiveInfoSerialize(sensitiveInfo.pattern(), sensitiveInfo.targetChar());
@@ -95,7 +92,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String>  implements C
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         }
-        return serializerProvider.findNullValueSerializer(beanProperty);
+        return serializerProvider.findNullValueSerializer(null);
     }
 
 
