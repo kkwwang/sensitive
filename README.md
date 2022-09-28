@@ -74,5 +74,7 @@ Connection: keep-alive
 
 Response code: 200; Time: 128ms; Content length: 109 bytes
 ```
+> [测试地址](http://localhost:8080/doc.html#/default/test-controller/test1UsingPOST)
+> [在线测试地址](http://101.43.64.92:8080/doc.html#/default/test-controller/test1UsingPOST)
 
 ### 欢迎提交新预定义规则，或对项目完善
