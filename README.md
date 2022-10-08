@@ -1,3 +1,5 @@
+[![OSCS Status](https://www.oscs1024.com/platform/badge/kkwwang/sensitive.svg?size=large)](https://www.oscs1024.com/project/kkwwang/sensitive?ref=badge_large)
+
 #### 说明
 
 > 项目依赖springMVC仅对`RestController`接口有效，即返回`JSON`格式的接口   
