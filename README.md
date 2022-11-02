@@ -56,27 +56,38 @@
 - 在需要脱敏的`Controller`方法或类上添加`@Sensitive`注解，方法上表示该接口需要脱敏，类表示该类所有方法均需脱敏
 
 ```http request
-// demo执行效果
+POST http://localhost:8080/test
+Content-Type: application/json
+sensitive-placeholder: (^_^) // 增加隐藏小彩蛋；请求头中携带sensitive-placeholder参数可以替换默认的*占位符
+
+{
+  "email": "kiilin@kiilin.com",
+  "idCard": "6222222222222222",
+  "name": "云声",
+  "phone": "18888888888",
+  "username": "kiilin"
+}
+
+### 
 http://localhost:8080/test
 
-HTTP/1.1 200
+HTTP/1.1 200 
 Content-Type: application/json
 Transfer-Encoding: chunked
-Date: Fri, 17 Jun 2022 02:47:34 GMT
+Date: Wed, 02 Nov 2022 03:31:36 GMT
 Keep-Alive: timeout=60
 Connection: keep-alive
 
 {
-  "email": "zhang***@qq.com",
-  "name": "张*",
-  "username": "zh**",
-  "phone": "138****8888",
-  "idCard": "320***********1234"
+  "email": "kii(^_^)(^_^)(^_^)@kiilin.com",
+  "name": "云(^_^)",
+  "username": "ki(^_^)(^_^)",
+  "phone": "188(^_^)(^_^)(^_^)(^_^)8888",
+  "idCard": "622(^_^)(^_^)(^_^)(^_^)(^_^)(^_^)(^_^)(^_^)(^_^)2222"
 }
 
-Response code: 200; Time: 128ms; Content length: 109 bytes
+Response code: 200; Time: 3ms (3 ms); Content length: 185 bytes (185 B)
 ```
 > [测试地址](http://localhost:8080/doc.html#/default/test-controller/test1UsingPOST)   
 > [在线测试地址](http://101.43.64.92:8080/doc.html#/default/test-controller/test1UsingPOST)   
 
-### 欢迎提交新预定义规则，或对项目完善
