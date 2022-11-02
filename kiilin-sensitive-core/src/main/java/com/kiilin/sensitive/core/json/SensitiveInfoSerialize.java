@@ -61,10 +61,11 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
         // 读取当前请求是否需要脱敏
         HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
         Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
+        String placeholder = request.getHeader("sensitive-placeholder");
 
         if (isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
             // 替换
-            value = value.replaceAll(this.pattern, this.targetChar);
+            value = value.replaceAll(this.pattern, StringUtils.hasText(placeholder) ? this.targetChar.replace("*", placeholder) : this.targetChar);
         }
 
         jsonGenerator.writeString(value);
