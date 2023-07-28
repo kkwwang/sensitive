@@ -1,0 +1,2 @@
+sensitive:
+  enable: ${SENSITIVE_ENABLE:true}

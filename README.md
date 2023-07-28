@@ -11,7 +11,7 @@
  ```xml
 <dependency>
     <groupId>com.kiilin</groupId>
-    <artifactId>kiilin-sensitive-core</artifactId>
+    <artifactId>sensitive-spring-boot-starter</artifactId>
     <version>latest_version</version>
 </dependency>
  ```
@@ -26,7 +26,7 @@
   </dependency>
   ```
 
-- 启动类添加启用注解
+~~- 启动类添加启用注解~~
   ```java
   package com.kiilin.sensitive.demo;
   
@@ -42,6 +42,7 @@
       }
   }
   ```
+- 增加自动装配，默认启用脱敏，增加系统环境变量`SENSITIVE_ENABLE=false`或springboot配置`sensitive.enable=false`关闭
 
 - 在需要脱敏的实体的字段上添加注解
 
