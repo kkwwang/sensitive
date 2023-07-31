@@ -9,6 +9,7 @@ package com.kiilin.sensitive.core.aspect;
 
 import com.kiilin.sensitive.core.annotation.Sensitive;
 import com.kiilin.sensitive.core.constant.SensitiveConstant;
+import jakarta.servlet.http.HttpServletRequest;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -18,7 +19,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerExecutionChain;
 import org.springframework.web.servlet.HandlerMapping;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Objects;
 
 

@@ -15,11 +15,11 @@ import com.fasterxml.jackson.databind.ser.ContextualSerializer;
 import com.kiilin.sensitive.core.annotation.SensitiveInfo;
 import com.kiilin.sensitive.core.constant.SensitiveConstant;
 import com.kiilin.sensitive.core.enums.SensitiveType;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Objects;
 
