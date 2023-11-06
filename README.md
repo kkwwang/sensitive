@@ -7,7 +7,7 @@
 > 支持`springboot`版本`1.4.0.RELEASE-2.7.0`   
 > 使用`springmvc`需自行注册bean，版本支持请自行验证   
 
-插件已推送至`maven`中央库   
+插件已推送至`maven`[中央库](https://central.sonatype.com/namespace/com.kiilin)   
  ```xml
 <dependency>
     <groupId>com.kiilin</groupId>
