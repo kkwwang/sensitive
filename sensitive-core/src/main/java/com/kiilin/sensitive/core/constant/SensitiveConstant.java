@@ -19,4 +19,7 @@ public class SensitiveConstant {
      * 是否需要脱敏
      */
     public static final String IS_SENSITIVE = "IS_SENSITIVE";
+    public static final String SENSITIVE_PLACEHOLDER = "sensitive-placeholder";
+
+
 }

@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.kiilin.sensitive.core.constant.SensitiveConstant.SENSITIVE_PLACEHOLDER;
+
 /**
  * 脱敏序列化方式
  *
@@ -64,7 +66,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
             Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
 
             if (isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
-                String placeholder = request.getHeader("sensitive-placeholder");
+                String placeholder = request.getHeader(SENSITIVE_PLACEHOLDER);
                 // 替换
                 value = value.replaceAll(this.pattern, StringUtils.hasText(placeholder) ? this.targetChar.replace("*", placeholder) : this.targetChar);
             }
@@ -97,7 +99,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         }
-        return serializerProvider.findNullValueSerializer(beanProperty);
+        return serializerProvider.findNullValueSerializer(null);
     }
 
 }
