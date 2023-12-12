@@ -9,7 +9,7 @@ public class UserInfoSuper {
     @SensitiveInfo(SensitiveType.EMAIL)
     private String email;
 
-    @SensitiveInfo(SensitiveType.CHINESE_NAME)
+    @SensitiveInfo(pattern = "(.{2})(.*)", targetChar = "$1**")
     private String name;
 
     public String getEmail() {
