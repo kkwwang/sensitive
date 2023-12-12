@@ -23,6 +23,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Objects;
 
+import static com.kiilin.sensitive.core.constant.SensitiveConstant.SENSITIVE_PLACEHOLDER;
+
 /**
  * 脱敏序列化方式
  *
@@ -58,16 +60,17 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
 
     @Override
     public void serialize(String value, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
-        // 读取当前请求是否需要脱敏
-        HttpServletRequest request = ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
-        Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
-        String placeholder = request.getHeader("sensitive-placeholder");
 
-        if (isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
-            // 替换
-            value = value.replaceAll(this.pattern, StringUtils.hasText(placeholder) ? this.targetChar.replace("*", placeholder) : this.targetChar);
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+        if (request != null) {
+            Object isSensitiveValue = request.getAttribute(SensitiveConstant.IS_SENSITIVE);
+
+            if (isSensitiveValue instanceof Boolean && (Boolean) isSensitiveValue) {
+                String placeholder = request.getHeader(SENSITIVE_PLACEHOLDER);
+                // 替换
+                value = value.replaceAll(this.pattern, StringUtils.hasText(placeholder) ? this.targetChar.replace("*", placeholder) : this.targetChar);
+            }
         }
-
         jsonGenerator.writeString(value);
     }
 
@@ -96,7 +99,7 @@ public class SensitiveInfoSerialize extends JsonSerializer<String> implements Co
             }
             return serializerProvider.findValueSerializer(beanProperty.getType(), beanProperty);
         }
-        return serializerProvider.findNullValueSerializer(beanProperty);
+        return serializerProvider.findNullValueSerializer(null);
     }
 
 }

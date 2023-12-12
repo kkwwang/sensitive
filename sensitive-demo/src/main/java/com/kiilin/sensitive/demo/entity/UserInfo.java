@@ -6,7 +6,7 @@ import com.kiilin.sensitive.core.enums.SensitiveType;
 
 public class UserInfo extends UserInfoSuper {
 
-    @SensitiveInfo(pattern = "(.{2})(.*)", targetChar = "$1**")
+    @SensitiveInfo(SensitiveType.CHINESE_NAME)
     private String username;
 
     @SensitiveInfo(SensitiveType.MOBILE_PHONE)
