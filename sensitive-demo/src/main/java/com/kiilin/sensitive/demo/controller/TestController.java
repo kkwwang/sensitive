@@ -15,7 +15,6 @@ public class TestController {
     public UserInfo test1(@RequestBody(required = false) UserInfo userInfo) {
         if (userInfo == null) {
             userInfo = new UserInfo();
-
             userInfo.setName("张三");
             userInfo.setUsername("zhangsan");
             userInfo.setEmail("zhangsan@qq.com");
@@ -23,6 +22,17 @@ public class TestController {
             userInfo.setPhone("13888888888");
         }
 
+        return userInfo;
+    }
+
+    @RequestMapping("/test1")
+    public UserInfo test1() {
+        UserInfo userInfo = new UserInfo();
+        userInfo.setName("张三");
+        userInfo.setUsername("zhangsan");
+        userInfo.setEmail("zhangsan@qq.com");
+        userInfo.setIdCard("320321199808081234");
+        userInfo.setPhone("13888888888");
         return userInfo;
     }
 }
