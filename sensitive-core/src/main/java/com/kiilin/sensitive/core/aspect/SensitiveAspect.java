@@ -12,6 +12,7 @@ import com.kiilin.sensitive.core.constant.SensitiveConstant;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
@@ -43,7 +44,7 @@ public class SensitiveAspect {
      *
      * @param requestMappingHandlerMapping 处理请求映射的HandlerMapping，用于获取当前请求对应的处理器方法。
      */
-    public SensitiveAspect(HandlerMapping requestMappingHandlerMapping) {
+    public SensitiveAspect(@Qualifier("requestMappingHandlerMapping") HandlerMapping requestMappingHandlerMapping) {
         this.requestMappingHandlerMapping = requestMappingHandlerMapping;
     }
 
