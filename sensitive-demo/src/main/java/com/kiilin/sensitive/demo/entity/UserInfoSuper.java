@@ -15,7 +15,7 @@ public class UserInfoSuper {
 
     // 姓名信息，使用@SensitiveInfo注解进行自定义敏感处理
     // pattern定义了匹配规则，targetChar定义了替换规则
-    @SensitiveInfo(pattern = "(.{2})(.*)", targetChar = "$1**")
+    @SensitiveInfo(pattern = "(.{1})(.*)", targetChar = "$1**")
     private String name;
 
     /**
